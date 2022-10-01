@@ -76,7 +76,7 @@ void Format::readRef()
             count++;
         }
         // Storing char arra into string
-        ref = convertToString(temp, count - 2); // 1 for M , 2 for M with space
+        ref = convertToString(temp, count - 1); // 1 for M , 2 for M with space
         // updating line pos
         currPos = count;
     }
