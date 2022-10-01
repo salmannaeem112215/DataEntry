@@ -18,6 +18,7 @@ string convertToString(char* a, int size)
 
 void Format::readNameCountryCity(){
     cout<<"Hell"<<endl;
+    // cout<<
 }
 
 
