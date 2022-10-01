@@ -28,6 +28,17 @@ public:
     int currPos;
 
     Format();
+    // Needed if There is SOme Null Values PResent 
+    void removeNullFromLine(){
+        char temp[500] ;
+        int count;
+        cout<<line.length();
+        for(int i=1 ; i<line.length();i+=2){
+            temp[count++]=line[i];
+        }
+        
+        line = convertToString(temp,count);
+    }
     void nullValue()
     {
         line = ref = name = country = city = "";
@@ -38,12 +49,11 @@ public:
     string convertToString(char *a, int size , int start=0)
     {
         int i;
-        string s = "";
-        for (i = start; i < size; i++)
-        {
-            s = s + a[i];
-        }
-        return s;
+    string s = "";
+    for (i = 0; i < size; i++) {
+       s=s+a[i];
+    }
+    return s;
     }
     void readRef();
     void readNameCountryCity();
