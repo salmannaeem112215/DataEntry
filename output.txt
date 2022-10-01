@@ -1,5 +1,5 @@
-362 19A 19 9F37 194 5	Mr.Milton A Kress	Mr.Milton A Kress Orlando	Mr.Milton A Kress OrlandoFL 
-441 36W 62 9199 591 6	Mr.Gilbert F Will	Mr.Gilbert F Will Beaufort	Mr.Gilbert F Will BeaufortSC 
-126 694 51 9323 984 F	Mr.William I Duckworth West	Mr.William I Duckworth West Allis	Mr.William I Duckworth West AllisWI 
-989 148 89 8538 F26 7	Ms.Corinne R Wetzler	Ms.Corinne R Wetzler Spencera	Ms.Corinne R Wetzler SpenceraIA 
-939 W96 66 F647 989 2	Ms.Thelma E Lugo	Ms.Thelma E Lugo Lenexa	Ms.Thelma E Lugo LenexaKS 
+362 19A 19 9F37 194 5	Mr.Milton A Kress	Orlando	FL 
+441 36W 62 9199 591 6	Mr.Gilbert F Will	Beaufort	SC 
+126 694 51 9323 984 F	Mr.William I Duckworth West	Allis	WI 
+989 148 89 8538 F26 7	Ms.Corinne R Wetzler	Spencera	IA 
+939 W96 66 F647 989 2	Ms.Thelma E Lugo	Lenexa	KS 

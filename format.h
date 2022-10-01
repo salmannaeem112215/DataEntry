@@ -50,7 +50,7 @@ public:
     {
         int i;
     string s = "";
-    for (i = 0; i < size; i++) {
+    for (i = start; i < size; i++) {
        s=s+a[i];
     }
     return s;
@@ -81,7 +81,51 @@ void Format::readRef()
         currPos = count;
     }
 }
+void Format::readNameCountryCity()
+{
 
+    int no_of_decimal = 0;
+    int start = currPos - 1;
+    int decimalIndex = -1;
+    int beforeDecimal = -1;
+    int afterDecimal = -1;
+    char temp[100] = {'\0'};
+    int lineIndex = currPos - 1;
+    // Read Till Decimal
+    while (true)
+    {
+        if (line[lineIndex] == '.')
+        {
+            no_of_decimal++;
+            if (no_of_decimal == 2)
+            {
+                break;
+            }
+        }
+        temp[decimalIndex++] = line[lineIndex++];
+    }
+    // Find Position Just Before Word
+    for (int i = decimalIndex - 1; i > 0; i--)
+    {
+        if (temp[i] == ' ')
+        {
+            beforeDecimal = i;
+            break;
+        }
+    }
+    // Will Do To Find City
+    afterDecimal = decimalIndex;
+    while (line[lineIndex] != '0')
+    {
+        temp[afterDecimal++] = line[lineIndex++];
+    }
+
+    name = convertToString(temp, beforeDecimal, 0);
+    country = convertToString(temp, decimalIndex, beforeDecimal + 1);
+    city = convertToString(temp, afterDecimal, decimalIndex + 1);
+
+    currPos = lineIndex;
+}
 
 
 
