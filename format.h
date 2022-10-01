@@ -32,11 +32,11 @@ public:
     void removeNullFromLine(){
         char temp[500] ;
         int count;
-        cout<<line.length();
+        cout<< line[0];
+        cout<< int(line[0])<<endl;
         for(int i=1 ; i<line.length();i+=2){
             temp[count++]=line[i];
         }
-        
         line = convertToString(temp,count);
     }
     void nullValue()
@@ -81,3 +81,11 @@ void Format::readRef()
         currPos = count;
     }
 }
+
+
+
+
+
+
+
+

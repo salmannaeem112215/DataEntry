@@ -81,7 +81,10 @@ int main(){
         Format lineFormator;
         while (getline(input,lineFormator.line))
         {
+            // Needed In case of Any Null Value Present in Char Arr;
+            if(int(lineFormator.line[20])==0 || int(lineFormator.line[21])==0 ){
             lineFormator.removeNullFromLine();
+            }
             cout<<lineFormator.line<<endl;
             
             lineFormator.readRef();
