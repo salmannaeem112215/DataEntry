@@ -1,7 +1,7 @@
 # Data Entry
 
-##Format.cpp
+## Format.cpp
 will only Read input.txt and make output.txt
-##driver.cpp 
+## driver.cpp 
 will read file entered by you and appened in excel.txt
 
