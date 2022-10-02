@@ -36,7 +36,8 @@ public:
     void nullValue();
     long long int wordToNumber(string &words);
     string convertToString(char *a, int size, int);
-
+    string addSpace(string , int );
+    
     // Necessary Function
     void readRef();
     void readNameCountryCity();
@@ -50,6 +51,7 @@ public:
     void readNo6();
     void readEndName();
     void readEndRef();
+    void addFormat();
 };
 
 Format::Format()
@@ -293,6 +295,21 @@ long long int Format::wordToNumber(string &words)
     n += temp;
     return n;
 }
+string Format::addSpace(string a, int space=3){
+        string temp="";
+        string final="";
+        for(int i=0 ;i<a.length();i++){
+            temp+=a[i];
+            if(a[i]==' '){
+                for(int i=1 ; i<space; i++){
+                    temp+=" ";
+                }
+            }
+        }
+        return temp;
+    }
+
+
 
 void Format::readRef()
 {
@@ -692,6 +709,16 @@ void Format::readEndRef(){
     string temp = "";
     while(currPos != line.length()-1){
         temp+=line[currPos++];
+        
     }
     endRef = temp;
+
+}
+
+void Format::addFormat(){
+    ref = addSpace(ref);
+    name = addSpace(name);
+
+    endRef=addSpace(endRef);
+    endName = addSpace(endName);
 }

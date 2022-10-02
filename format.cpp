@@ -6,7 +6,6 @@
 #include "format.h"
 using namespace std;
 
-
 int main()
 {
     fstream input;
@@ -22,7 +21,6 @@ int main()
     }
     else
     {
-        string line;
         string page_no;
         int line_no = 0;
         getline(input, page_no);
@@ -33,7 +31,7 @@ int main()
             if (int(lineFormator.line[20]) == 0 || int(lineFormator.line[21]) == 0)
             {
                 lineFormator.removeNullFromLine();
-            }          
+            }
             lineFormator.line;
             lineFormator.readRef();
             lineFormator.readNameCountryCity();
@@ -47,13 +45,24 @@ int main()
             lineFormator.readNo6();
             lineFormator.readEndName();
             lineFormator.readEndRef();
+            lineFormator.addFormat();
 
-            lineFormator.display();
+            // lineFormator.display();
             lineFormator.storeDataOnFile(output);
-
             lineFormator.nullValue();
         }
+        input.close();
+        output.close();
     }
-    cout<<"Press Key To Exist "<<endl;
+    cout << "Press Key To Exist " << endl;
     getch();
 }
+
+
+// void main1(){
+//     string fileName;
+//     cout<<"Enter FileName To read ->";
+//     cin>>fileName;
+    
+
+// }
