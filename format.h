@@ -33,7 +33,8 @@ public:
             <<name<<"\t"
             <<country<<"\t"
             <<city<<'\t'
-            <<dollars<<"."<<cents<<"\t" 
+            <<dollars<<"."<<cents<<"\t"
+            <<no1<<"\t" 
             <<endl;
     }
     // Needed if There is SOme Null Values PResent
@@ -196,6 +197,8 @@ public:
     void readNameCountryCity();
     void readDollars();
     void readCents();
+    void readNo1();
+    void readNo2();
 };
 
 Format::Format()
@@ -312,4 +315,83 @@ void Format::readCents(){
     while(line[index]!=' '){
         index++;
     }
+    currPos=index;
+}
+
+
+// AND Sixteen %
+void Format::readNo1(){
+    string number="";
+    string word="";
+    int index=currPos;
+
+    while(word!="%"){
+        if(word=="AND" || word=="ND" || word == "and" || word == "nd" ){
+            word="";
+        }
+        else if(line[index]==' '){
+            number += (' '+word);
+            word="";
+        }
+        else{
+            word+=line[index];
+        }
+        index++;
+    }
+    number+=' ';
+
+    no1=wordToNumber(number);
+    // cout<<"("<<number<<")"<<endl;
+    currPos=index;
+
+}
+//  Twenty Two Years AND 
+void Format::readNo2(){
+    string number="";
+    string word="";
+    int index=currPos;
+
+    while(word!="Years"){
+        // Error if no space is present
+        // Example FortyFour 
+        if(word.length()>2  ){
+                   cout<<"In If Conditio"<<endl;
+            if(int(word[word.length()-2])<=122 && int(word[word.length()-2])>=97 ){
+                   cout<<"word Length is small"<<endl;
+                if(int(word[word.length()-1])<=90 && int(word[word.length()-1])>=65 ){
+                   cout<<"word Length next is Large"<<endl;
+                   cout<<"("<<word<<")"<<endl;
+                    char temp = word[word.length()-1];
+                   word[word.length()-1]=' ';
+                   word+=temp;
+                   cout<<word<<endl;
+
+                   cout<<"("<<word<<")"<<endl;
+                   cout<<"In If Conditio"<<endl;
+                }
+            }
+        }
+        if(word=="years" || word=="year" ){
+            if(line[index+1]='s'){
+                index++;
+                 }
+            word="";
+            break;
+        }
+        else if(line[index]==' '){
+            number += (' '+word);
+            word="";
+        }
+        else{
+            word+=line[index];
+        }
+        index++;
+    }
+    number+=' ';
+
+    no2=wordToNumber(number);
+    cout<<"("<<number<<")"<<endl;
+    cout<<"("<<no2<<")"<<endl;
+    currPos=index;
+
 }

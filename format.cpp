@@ -41,6 +41,8 @@ int main()
             lineFormator.readNameCountryCity();
             lineFormator.readDollars();
             lineFormator.readCents();
+            lineFormator.readNo1();
+            lineFormator.readNo2();
 
             lineFormator.storeDataOnFile(output);
 
