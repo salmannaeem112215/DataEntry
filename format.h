@@ -8,6 +8,8 @@ using namespace std;
 class Format
 {
 public:
+    string page_no;
+    int totalLine;
     string line;
     string ref;
     string name;
@@ -28,7 +30,7 @@ public:
     int currPos;
 
     Format();
-    
+
     // Utility Functions
     void display();
     void removeNullFromLine();
@@ -36,8 +38,8 @@ public:
     void nullValue();
     long long int wordToNumber(string &words);
     string convertToString(char *a, int size, int);
-    string addSpace(string , int );
-    
+    string addSpace(string, int);
+
     // Necessary Function
     void readRef();
     void readNameCountryCity();
@@ -56,11 +58,16 @@ public:
 
 Format::Format()
 {
+    page_no=" ";
+    totalLine=0;
     nullValue();
 }
 
-void Format::display(){
-        cout << ref << "\t"
+void Format::display()
+{
+    cout << page_no << "\t"
+         << totalLine << "\t"
+         << ref << "\t"
          << name << "\t"
          << country << "\t"
          << city << '\t'
@@ -78,20 +85,22 @@ void Format::display(){
 
 void Format::storeDataOnFile(fstream &file)
 {
-    file << ref << "\t"
-         << name << "\t"
-         << country << "\t"
-         << city << '\t'
-         << dollars << "." << cents << "\t"
-         << no1 << "\t"
-         << no2 << "\t"
-         << no3 << "\t"
-         << no4 << "\t"
-         << no5 << "\t"
-         << no6 << "\t"
-         << endName << "\t"
-         << endRef << "\t"
-         << endl;
+    file<< page_no << "\t"
+        << totalLine << "\t"
+        << ref << "\t"
+        << name << "\t"
+        << country << "\t"
+        << city << '\t'
+        << dollars << "." << cents << "\t"
+        << no1 << "\t"
+        << no2 << "\t"
+        << no3 << "\t"
+        << no4 << "\t"
+        << no5 << "\t"
+        << no6 << "\t"
+        << endName << "\t"
+        << endRef << "\t"
+        << endl;
 }
 // Needed if There is SOme Null Values PResent
 // Also Add Sapce between 2 words if not present
@@ -122,8 +131,7 @@ void Format::removeNullFromLine()
 void Format::nullValue()
 {
     line = ref = name = country = city = endName = endRef = no4 = no5 = no6 = "";
-    dollars = cents = no1 = no2 = no3  = lineSize = currPos = 0;
-
+    dollars = cents = no1 = no2 = no3 = lineSize = currPos = 0;
 }
 string Format::convertToString(char *a, int size, int start = 0)
 {
@@ -295,21 +303,23 @@ long long int Format::wordToNumber(string &words)
     n += temp;
     return n;
 }
-string Format::addSpace(string a, int space=3){
-        string temp="";
-        string final="";
-        for(int i=0 ;i<a.length();i++){
-            temp+=a[i];
-            if(a[i]==' '){
-                for(int i=1 ; i<space; i++){
-                    temp+=" ";
-                }
+string Format::addSpace(string a, int space = 3)
+{
+    string temp = "";
+    string final = "";
+    for (int i = 0; i < a.length(); i++)
+    {
+        temp += a[i];
+        if (a[i] == ' ')
+        {
+            for (int i = 1; i < space; i++)
+            {
+                temp += " ";
             }
         }
-        return temp;
     }
-
-
+    return temp;
+}
 
 void Format::readRef()
 {
@@ -536,11 +546,10 @@ void Format::readNo3()
     number += ' ';
     no3 = no3 + 0.01 * wordToNumber(number);
 
-
     if (!decimal)
     {
         cout << "Error Found Decimal Not FOund " << endl;
-        cout << " In Ref " << ref << endl;
+        cout << " In Page " << page_no <<"\t Line No "<<totalLine << "\t And Ref " << ref << endl;
         cout << " no3 Value " << no3 << endl;
     }
     currPos = index;
@@ -558,40 +567,42 @@ void Format::readNo4()
     while (found)
     {
         // Space Found Before
-        if (line[index] == ' ' || line[index]=='n')
+        if (line[index] == ' ' || line[index] == 'n')
         {
-            if(line[index]=='n'){
+            if (line[index] == 'n')
+            {
                 index++;
                 break;
             }
             // Is Not Number
             if (int(line[index - 1]) >= 57 && int(line[index - 1]) >= 48)
             {
-                    if (int(line[index + 1]) <= 57 && int(line[index + 1]) >= 48)
-                    {
-                        break;
-                    }
-            }            
+                if (int(line[index + 1]) <= 57 && int(line[index + 1]) >= 48)
+                {
+                    break;
+                }
+            }
         }
         index--;
     }
-bool decimal = false;
-   for(int i=index; i<currPos; i++){
-    if(line[i]=='.'){
-        decimal=true;
+    bool decimal = false;
+    for (int i = index; i < currPos; i++)
+    {
+        if (line[i] == '.')
+        {
+            decimal = true;
+        }
+        number += line[i];
     }
-    number+=line[i];
-    
-   }
-    number+=" ";
-    no4=number;
+    number += " ";
+    no4 = number;
 
     currPos++;
 
     if (!decimal)
     {
         cout << "Error Found Decimal Not FOund " << endl;
-        cout << " In Ref " << ref << endl;
+        cout << " In Page " << page_no <<"\t Line No "<<totalLine << "\t And Ref " << ref << endl;
         cout << " no4 Value " << no4 << endl;
     }
 }
@@ -608,38 +619,42 @@ void Format::readNo5()
     while (found)
     {
         // Space Found Before
-        if (line[index] == ' ' || line[index]=='n')
+        if (line[index] == ' ' || line[index] == 'n')
         {
-            if(line[index]=='n'){
+            if (line[index] == 'n')
+            {
                 index++;
                 break;
             }
             // Is Not Number
             if (int(line[index - 1]) >= 57 && int(line[index - 1]) >= 48)
             {
-                    if (int(line[index + 1]) <= 57 && int(line[index + 1]) >= 48)
-                    {
-                        break;
-                    }
-            }            
+                if (int(line[index + 1]) <= 57 && int(line[index + 1]) >= 48)
+                {
+                    break;
+                }
+            }
         }
         index--;
     }
-    bool decimal=false;;
-   for(int i=index; i<currPos; i++){
-    if(line[i]=='.'){
-        decimal= true;
+    bool decimal = false;
+    ;
+    for (int i = index; i < currPos; i++)
+    {
+        if (line[i] == '.')
+        {
+            decimal = true;
+        }
+        number += line[i];
     }
-    number+=line[i];
-   }
-    number+=" ";
-    no5=number;
+    number += " ";
+    no5 = number;
     currPos++;
 
     if (!decimal)
     {
         cout << "Error Found Decimal Not FOund " << endl;
-        cout << " In Ref " << ref << endl;
+        cout << " In Page " << page_no <<"\t Line No "<<totalLine << "\t And Ref " << ref << endl;
         cout << " no5 Value " << no5 << endl;
     }
 }
@@ -656,69 +671,77 @@ void Format::readNo6()
     while (found)
     {
         // Space Found Before
-        if (line[index] == ' ' || line[index]=='n')
+        if (line[index] == ' ' || line[index] == 'n')
         {
-            if(line[index]=='n'){
+            if (line[index] == 'n')
+            {
                 index++;
                 break;
             }
             // Is Not Number
             if (int(line[index - 1]) >= 57 && int(line[index - 1]) >= 48)
             {
-                    if (int(line[index + 1]) <= 57 && int(line[index + 1]) >= 48)
-                    {
-                        break;
-                    }
-            }            
+                if (int(line[index + 1]) <= 57 && int(line[index + 1]) >= 48)
+                {
+                    break;
+                }
+            }
         }
         index--;
     }
-    bool decimal=false;;
-   for(int i=index; i<currPos; i++){
-    if(line[i]=='.'){
-        decimal= true;
+    bool decimal = false;
+    ;
+    for (int i = index; i < currPos; i++)
+    {
+        if (line[i] == '.')
+        {
+            decimal = true;
+        }
+        number += line[i];
     }
-    number+=line[i];
-   }
-    number+=" ";
-    no6=number;
+    number += " ";
+    no6 = number;
     currPos++;
 
     if (!decimal)
     {
         cout << "Error Found Decimal Not FOund " << endl;
-        cout << " In Ref " << ref << endl;
+        cout << " In Page " << page_no <<"\t Line No "<<totalLine << "\t And Ref " << ref << endl;
         cout << " no6 Value " << no6 << endl;
     }
 }
-void Format::readEndName(){
+void Format::readEndName()
+{
     // Skip Until Space is Find
-    while(line[currPos]!=' '){
+    while (line[currPos] != ' ')
+    {
         currPos++;
     }
-    string temp=" ";
-    while(line[currPos]!='0'){
-        temp+=line[currPos];
+    string temp = " ";
+    while (line[currPos] != '0')
+    {
+        temp += line[currPos];
         currPos++;
     }
-    endName=temp;
+    endName = temp;
     currPos++;
 }
 
-void Format::readEndRef(){
+void Format::readEndRef()
+{
     string temp = "";
-    while(currPos != line.length()-1){
-        temp+=line[currPos++];
-        
+    while (currPos != line.length() - 1)
+    {
+        temp += line[currPos++];
     }
     endRef = temp;
-
 }
 
-void Format::addFormat(){
+void Format::addFormat()
+{
     ref = addSpace(ref);
     name = addSpace(name);
 
-    endRef=addSpace(endRef);
+    endRef = addSpace(endRef);
     endName = addSpace(endName);
 }

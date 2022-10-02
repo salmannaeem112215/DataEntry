@@ -9,6 +9,8 @@ using namespace std;
 void appendDataFromFile(string fileName)
 {   fstream input;
     fstream output;
+    string page_no = fileName;
+    fileName+=".txt";
     input.open(fileName.c_str(), ios::in);
     output.open("excelData.txt", ios::app);
 
@@ -18,12 +20,14 @@ void appendDataFromFile(string fileName)
     }
     else
     {
-        string page_no;
+        string temp_page_no;
         int line_no = 0;
-        getline(input, page_no);
+        getline(input, temp_page_no);
         Format lineFormator;
+        lineFormator.page_no=page_no;
         while (getline(input, lineFormator.line))
         {
+            lineFormator.totalLine++;
             // Needed In case of Any Null Value Present in Char Arr;
             if (int(lineFormator.line[20]) == 0 || int(lineFormator.line[21]) == 0)
             {
@@ -69,8 +73,10 @@ int main()
         if(page_no=="-1"){
             break;
         }
-        page_no+=".txt";
+        page_no;
+        cout<<"============================================================"<<endl;
         appendDataFromFile(page_no);
+        cout<<"============================================================"<<endl;
 
         page_no=="";
 
