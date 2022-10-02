@@ -34,11 +34,12 @@ int main()
             {
                 lineFormator.removeNullFromLine();
             }
-            cout << lineFormator.line << endl;
+            // cout << lineFormator.line << endl;
+            
 
             lineFormator.readRef();
             lineFormator.readNameCountryCity();
-
+            lineFormator.readDollars();
            lineFormator.storeDataOnFile(output);
 
             lineFormator.nullValue();
