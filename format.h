@@ -33,7 +33,7 @@ public:
             <<name<<"\t"
             <<country<<"\t"
             <<city<<'\t'
-            <<dollars<<"." 
+            <<dollars<<"."<<cents<<"\t" 
             <<endl;
     }
     // Needed if There is SOme Null Values PResent
@@ -195,6 +195,7 @@ public:
     void readRef();
     void readNameCountryCity();
     void readDollars();
+    void readCents();
 };
 
 Format::Format()
@@ -280,4 +281,35 @@ void Format::readDollars(){
     }
     totalAmount += " ";
     dollars = wordToNumber(totalAmount);
+
+    // Updating Index
+    currPos = index +1;
+    
+}
+
+void Format::readCents(){
+    string totalCents="";
+    string word="";
+    int index=currPos+1;
+
+    while(word!="Ce" && word!="ce" && word!="CE" && word!="cE" ){
+        if(word=="and" || word=="And" || word == "ANd" || word == "AND" || word=="nd" || word=="nd" || word == "Nd" || word == "ND"){
+            word="";
+        }
+        else if(line[index]==' '){
+            totalCents += (' '+word);
+            word="";
+        }
+        else{
+            word+=line[index];
+        }
+        index++;
+    }
+    totalCents+=' ';
+    cents=wordToNumber(totalCents);
+
+    // To go to the Next Space ( before AND)
+    while(line[index]!=' '){
+        index++;
+    }
 }
