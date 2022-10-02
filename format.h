@@ -48,6 +48,8 @@ public:
     void readNo4();
     void readNo5();
     void readNo6();
+    void readEndName();
+    void readEndRef();
 };
 
 Format::Format()
@@ -67,6 +69,8 @@ void Format::display(){
          << no4 << "\t"
          << no5 << "\t"
          << no6 << "\t"
+         << endName << "\t"
+         << endRef << "\t"
          << endl;
 }
 
@@ -83,6 +87,8 @@ void Format::storeDataOnFile(fstream &file)
          << no4 << "\t"
          << no5 << "\t"
          << no6 << "\t"
+         << endName << "\t"
+         << endRef << "\t"
          << endl;
 }
 // Needed if There is SOme Null Values PResent
@@ -667,5 +673,25 @@ void Format::readNo6()
         cout << " In Ref " << ref << endl;
         cout << " no6 Value " << no6 << endl;
     }
+}
+void Format::readEndName(){
+    // Skip Until Space is Find
+    while(line[currPos]!=' '){
+        currPos++;
+    }
+    string temp=" ";
+    while(line[currPos]!='0'){
+        temp+=line[currPos];
+        currPos++;
+    }
+    endName=temp;
+    currPos++;
+}
 
+void Format::readEndRef(){
+    string temp = "";
+    while(currPos != line.length()-1){
+        temp+=line[currPos++];
+    }
+    endRef = temp;
 }
