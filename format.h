@@ -28,32 +28,33 @@ public:
     int currPos;
 
     Format();
-    // Needed if There is SOme Null Values PResent 
-    void removeNullFromLine(){
-        char temp[500] ;
-        int count;
-        cout<< line[0];
-        cout<< int(line[0])<<endl;
-        for(int i=1 ; i<line.length();i+=2){
-            temp[count++]=line[i];
+    // Needed if There is SOme Null Values PResent
+    void removeNullFromLine()
+    {
+        string temp = "";
+        for (int i = 0; i < line.length(); i++)
+        {
+            if (int(line[i]) != 0)
+            {
+                temp += line[i];
+            }
         }
-        line = convertToString(temp,count);
+        line = temp;
     }
     void nullValue()
     {
-        line = ref = name = country = city = "";
-        dollars = cents = no1 = no2 = no3 = no4 = no5 = no6 = 0;
-        endName = endRef = "";
-        lineSize = currPos = 0;
+        line = ref = name = country = city = endName = endRef = "";
+        dollars = cents = no1 = no2 = no3 = no4 = no5 = no6 = lineSize = currPos = 0;
     }
-    string convertToString(char *a, int size , int start=0)
+    string convertToString(char *a, int size, int start = 0)
     {
         int i;
-    string s = "";
-    for (i = start; i < size; i++) {
-       s=s+a[i];
-    }
-    return s;
+        string s = "";
+        for (i = start; i < size; i++)
+        {
+            s = s + a[i];
+        }
+        return s;
     }
     void readRef();
     void readNameCountryCity();
@@ -126,10 +127,3 @@ void Format::readNameCountryCity()
 
     currPos = lineIndex;
 }
-
-
-
-
-
-
-
