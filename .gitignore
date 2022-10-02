@@ -32,4 +32,6 @@
 *.app
 
 #txtFile
-# *.txt
+*.txt
+!678.txt
+!input.txt
