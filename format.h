@@ -28,7 +28,9 @@ public:
     int currPos;
 
     Format();
+    
     // Utility Functions
+    void display();
     void removeNullFromLine();
     void storeDataOnFile(fstream &file);
     void nullValue();
@@ -51,6 +53,21 @@ public:
 Format::Format()
 {
     nullValue();
+}
+
+void Format::display(){
+        cout << ref << "\t"
+         << name << "\t"
+         << country << "\t"
+         << city << '\t'
+         << dollars << "." << cents << "\t"
+         << no1 << "\t"
+         << no2 << "\t"
+         << no3 << "\t"
+         << no4 << "\t"
+         << no5 << "\t"
+         << no6 << "\t"
+         << endl;
 }
 
 void Format::storeDataOnFile(fstream &file)
@@ -98,7 +115,7 @@ void Format::nullValue()
 {
     line = ref = name = country = city = endName = endRef = no4 = no5 = no6 = "";
     dollars = cents = no1 = no2 = no3  = lineSize = currPos = 0;
-    cout << endl;
+
 }
 string Format::convertToString(char *a, int size, int start = 0)
 {
@@ -268,7 +285,6 @@ long long int Format::wordToNumber(string &words)
         }
     }
     n += temp;
-    cout << n << "\t";
     return n;
 }
 
@@ -496,7 +512,7 @@ void Format::readNo3()
     }
     number += ' ';
     no3 = no3 + 0.01 * wordToNumber(number);
-    cout << no3 << endl;
+
 
     if (!decimal)
     {
@@ -513,7 +529,6 @@ void Format::readNo4()
     bool found = true;
     while (line[currPos] != '%')
     {
-        // cout<<line[currPos];
         currPos++;
     }
     int index = currPos;
@@ -547,9 +562,7 @@ bool decimal = false;
    }
     number+=" ";
     no4=number;
-    // cout<<number<<"\t";
 
-    cout<<line[currPos]<<endl;
     currPos++;
 
     if (!decimal)
@@ -566,7 +579,6 @@ void Format::readNo5()
     bool found = true;
     while (line[currPos] != '%')
     {
-        // cout<<line[currPos];
         currPos++;
     }
     int index = currPos;
@@ -588,7 +600,6 @@ void Format::readNo5()
                     }
             }            
         }
-        // cout<<line[index];
         index--;
     }
     bool decimal=false;;
@@ -618,7 +629,6 @@ void Format::readNo6()
     {
         currPos++;
     }
-    cout<<line[currPos]<<endl;
     int index = currPos; // Position just before %
     while (found)
     {
@@ -638,7 +648,6 @@ void Format::readNo6()
                     }
             }            
         }
-        cout<<line[index];
         index--;
     }
     bool decimal=false;;
@@ -650,7 +659,6 @@ void Format::readNo6()
    }
     number+=" ";
     no6=number;
-    cout<<number<<endl;
     currPos++;
 
     if (!decimal)

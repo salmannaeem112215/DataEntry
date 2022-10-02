@@ -46,7 +46,7 @@ int main()
             lineFormator.readNo5();
             lineFormator.readNo6();
 
-
+            lineFormator.display();
             lineFormator.storeDataOnFile(output);
 
             lineFormator.nullValue();
