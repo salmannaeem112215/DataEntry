@@ -4,16 +4,13 @@
 #include <string>
 #include <conio.h>
 #include "format.h"
-using namespace std;
 
-int main()
-{
-    fstream input;
+using namespace std;
+void appendDataFromFile(string fileName)
+{   fstream input;
     fstream output;
-    char input_fileName[] = "input.txt";
-    char output_fileName[] = "output.txt";
-    input.open(input_fileName, ios::in);
-    output.open(output_fileName, ios::out);
+    input.open(fileName.c_str(), ios::in);
+    output.open("excelData.txt", ios::app);
 
     if (!input.is_open())
     {
@@ -54,17 +51,28 @@ int main()
         input.close();
         output.close();
     }
-    cout << "Press Key To Exist " << endl;
-    getch();
+
 }
 
 
-// void main1(){
-//     string fileName;
-//     cout<<"Enter FileName To read ->";
-//     cin>>fileName;
+int main()
+{
+    string page_no  ;
+    string fileName = " ";
+    fstream input;
+    do
+    {
+        cout << "Enter -1 to Exist "<<endl;
+        cout << "Enter Page No -> ";
+        cin >> page_no;
+        
+        if(page_no=="-1"){
+            break;
+        }
+        page_no+=".txt";
+        appendDataFromFile(page_no);
 
-//     cout<<" "
-    
+        page_no=="";
 
-// }
+    } while (true);
+}
