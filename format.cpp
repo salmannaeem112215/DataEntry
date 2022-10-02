@@ -33,21 +33,21 @@ int main()
             if (int(lineFormator.line[20]) == 0 || int(lineFormator.line[21]) == 0)
             {
                 lineFormator.removeNullFromLine();
-            }
-            cout << lineFormator.line << endl;
-            
-
+            }          
+            lineFormator.line;
             lineFormator.readRef();
             lineFormator.readNameCountryCity();
             lineFormator.readDollars();
             lineFormator.readCents();
             lineFormator.readNo1();
             lineFormator.readNo2();
+            lineFormator.readNo3();
 
             lineFormator.storeDataOnFile(output);
 
             lineFormator.nullValue();
         }
     }
+    cout<<"Press Key To Exist "<<endl;
     getch();
 }

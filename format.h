@@ -28,231 +28,242 @@ public:
     int currPos;
 
     Format();
-    void storeDataOnFile(fstream &file)
-    {
-        file << ref << "\t"
-             << name << "\t"
-             << country << "\t"
-             << city << '\t'
-             << dollars << "." << cents << "\t"
-             << no1 << "\t"
-             << no2 << "\t"
-             << endl;
-    }
-    // Needed if There is SOme Null Values PResent
-    // Also Add Sapce between 2 words if not present
-    void removeNullFromLine()
-    {
-        string temp = "";
-        for (int i = 0; i < line.length(); i++)
-        {
-            if (int(line[i]) != 0)
-            {
-                if (temp.length() > 2)
-                {
-                    if (int(temp[temp.length() - 2]) <= 122 && int(temp[temp.length() - 2]) >= 97)
-                    {
-                        if (int(temp[temp.length() - 1]) <= 90 && int(temp[temp.length() - 1]) >= 65)
-                        {
-                            char a = temp[temp.length() - 1];
-                            temp[temp.length() - 1] = ' ';
-                            temp += a;
-                        }
-                    }
-                }
-                temp += line[i];
-            }
-        }
-        line = temp;
-    }
+    // Utility Functions
+    void removeNullFromLine();
+    void storeDataOnFile(fstream &file);
+    void nullValue();
+    long long int wordToNumber(string &words);
+    string convertToString(char *a, int size, int);
 
-    void nullValue()
-    {
-        line = ref = name = country = city = endName = endRef = "";
-        dollars = cents = no1 = no2 = no3 = no4 = no5 = no6 = lineSize = currPos = 0;
-    }
-    string convertToString(char *a, int size, int start = 0)
-    {
-        int i;
-        string s = "";
-        for (i = start; i < size; i++)
-        {
-            s = s + a[i];
-        }
-        return s;
-    }
-    long long int wordToNumber(string &words)
-    {
-        string myword = "";
-
-        long long int n = 0; // the number
-        long long int temp = 0;
-        long long int finalVlaue = 0;
-        for (int i = 0; words[i] != '\0'; i++)
-        {
-            if (words[i] == ' ' || words[i] == '\0')
-            {
-                if (myword == "one" || myword == "One")
-                {
-                    temp += 1;
-                }
-                else if (myword == "two" || myword == "Two")
-                {
-                    temp += 2;
-                }
-                else if (myword == "three" || myword == "Three")
-                {
-                    temp += 3;
-                }
-                else if (myword == "four" || myword == "Four")
-                {
-                    temp += 4;
-                }
-                else if (myword == "five" || myword == "Five")
-                {
-                    temp += 5;
-                }
-                else if (myword == "six" || myword == "Six")
-                {
-                    temp += 6;
-                }
-                else if (myword == "seven" || myword == "Seven")
-                {
-                    temp += 7;
-                }
-                else if (myword == "eight" || myword == "Eight")
-                {
-                    temp += 8;
-                }
-                else if (myword == "nine" || myword == "Nine")
-                {
-                    temp += 9;
-                }
-                else if (myword == "ten" || myword == "Ten")
-                {
-                    temp += 10;
-                }
-                else if (myword == "eleven" || myword == "Eleven")
-                {
-                    temp += 11;
-                }
-                else if (myword == "twelve" || myword == "Twelve ")
-                {
-                    temp += 12;
-                }
-                else if (myword == "thirteen" || myword == "Thirteen")
-                {
-                    temp += 13;
-                }
-                else if (myword == "fourteen" || myword == "Fourteen")
-                {
-                    temp += 14;
-                }
-                else if (myword == "fifteen" || myword == "Fifteen")
-                {
-                    temp += 15;
-                }
-                else if (myword == "sixteen" || myword == "Sixteen")
-                {
-                    temp += 16;
-                }
-                else if (myword == "seventeen" || myword == "Seventeen")
-                {
-                    temp += 17;
-                }
-                else if (myword == "eighteen" || myword == "Eighteen")
-                {
-                    temp += 18;
-                }
-                else if (myword == "nineteen" || myword == "Nineteen")
-                {
-                    temp += 18;
-                }
-                else if (myword == "twenty" || myword == "Twenty")
-                {
-                    temp += 20;
-                }
-                else if (myword == "thirty" || myword == "Thirty")
-                {
-                    temp += 30;
-                }
-                else if (myword == "fourty" || myword == "Fourty" || myword == "Forty" || myword == "Forty")
-                {
-                    temp += 40;
-                }
-                else if (myword == "fifty" || myword == "Fifty")
-                {
-                    temp += 50;
-                }
-                else if (myword == "sixty" || myword == "Sixty")
-                {
-                    temp += 60;
-                }
-                else if (myword == "seventy" || myword == "Seventy")
-                {
-                    temp += 70;
-                }
-                else if (myword == "eighty" || myword == "Eighty")
-                {
-                    temp += 80;
-                }
-                else if (myword == "ninety" || myword == "Ninety")
-                {
-                    temp += 90;
-                }
-                else if (myword == "hundreds" || myword == "Hundreds" || myword == "Hundred" || myword == "hundred" ||
-                         myword == "wundreds" || myword == "Wundreds" || myword == "Wundred" || myword == "wundred")
-                {
-                    temp *= 100;
-                }
-                else if (myword == "thousand" || myword == "Thousand" || myword == "Thousands" || myword == "thousands")
-                {
-                    n += (temp * 1000);
-                    temp = 0;
-                }
-                else if (myword == "million" || myword == "Million" || myword == "Millions" || myword == "millions")
-                {
-                    n += (temp * 1000000);
-                    temp = 0;
-                }
-                else if (myword == "billion" || myword == "Billion" || myword == "Billions" || myword == "billions")
-                {
-                    n += (temp * 1000000000);
-                    temp = 0;
-                }
-                else
-                {
-                    // If Anyy Error in Words Reading will tell
-                    if (int(myword[0]) != 0)
-                    {
-                        cout << "Error";
-                        cout << " In Ref " << ref << endl;
-                        cout << "Words" << words << endl;
-                        cout << "(" << myword << ")" << endl;
-                    }
-                }
-                myword = "";
-            }
-            else
-            {
-                myword += words[i];
-            }
-        }
-        n += temp;
-        return n;
-    }
-
+    // Necessary Function
     void readRef();
     void readNameCountryCity();
     void readDollars();
     void readCents();
     void readNo1();
     void readNo2();
+    void readNo3();
 };
 
 Format::Format()
 {
     nullValue();
+}
+
+void Format::storeDataOnFile(fstream &file)
+{
+    file << ref << "\t"
+         << name << "\t"
+         << country << "\t"
+         << city << '\t'
+         << dollars << "." << cents << "\t"
+         << no1 << "\t"
+         << no2 << "\t"
+         << no3 << "\t"
+         << endl;
+}
+// Needed if There is SOme Null Values PResent
+// Also Add Sapce between 2 words if not present
+void Format::removeNullFromLine()
+{
+    string temp = "";
+    for (int i = 0; i < line.length(); i++)
+    {
+        if (int(line[i]) != 0)
+        {
+            if (temp.length() > 2)
+            {
+                if (int(temp[temp.length() - 2]) <= 122 && int(temp[temp.length() - 2]) >= 97)
+                {
+                    if (int(temp[temp.length() - 1]) <= 90 && int(temp[temp.length() - 1]) >= 65)
+                    {
+                        char a = temp[temp.length() - 1];
+                        temp[temp.length() - 1] = ' ';
+                        temp += a;
+                    }
+                }
+            }
+            temp += line[i];
+        }
+    }
+    line = temp;
+}
+void Format::nullValue()
+{
+    line = ref = name = country = city = endName = endRef = "";
+    dollars = cents = no1 = no2 = no3 = no4 = no5 = no6 = lineSize = currPos = 0;
+    cout << endl;
+}
+string Format::convertToString(char *a, int size, int start = 0)
+{
+    int i;
+    string s = "";
+    for (i = start; i < size; i++)
+    {
+        s = s + a[i];
+    }
+    return s;
+}
+long long int Format::wordToNumber(string &words)
+{
+    string myword = "";
+
+    long long int n = 0; // the number
+    long long int temp = 0;
+    long long int finalVlaue = 0;
+    for (int i = 0; words[i] != '\0'; i++)
+    {
+        if (words[i] == ' ' || words[i] == '\0')
+        {
+            if (myword == "one" || myword == "One")
+            {
+                temp += 1;
+            }
+            else if (myword == "two" || myword == "Two")
+            {
+                temp += 2;
+            }
+            else if (myword == "three" || myword == "Three")
+            {
+                temp += 3;
+            }
+            else if (myword == "four" || myword == "Four")
+            {
+                temp += 4;
+            }
+            else if (myword == "five" || myword == "Five")
+            {
+                temp += 5;
+            }
+            else if (myword == "six" || myword == "Six")
+            {
+                temp += 6;
+            }
+            else if (myword == "seven" || myword == "Seven")
+            {
+                temp += 7;
+            }
+            else if (myword == "eight" || myword == "Eight")
+            {
+                temp += 8;
+            }
+            else if (myword == "nine" || myword == "Nine")
+            {
+                temp += 9;
+            }
+            else if (myword == "ten" || myword == "Ten")
+            {
+                temp += 10;
+            }
+            else if (myword == "eleven" || myword == "Eleven")
+            {
+                temp += 11;
+            }
+            else if (myword == "twelve" || myword == "Twelve ")
+            {
+                temp += 12;
+            }
+            else if (myword == "thirteen" || myword == "Thirteen")
+            {
+                temp += 13;
+            }
+            else if (myword == "fourteen" || myword == "Fourteen")
+            {
+                temp += 14;
+            }
+            else if (myword == "fifteen" || myword == "Fifteen")
+            {
+                temp += 15;
+            }
+            else if (myword == "sixteen" || myword == "Sixteen")
+            {
+                temp += 16;
+            }
+            else if (myword == "seventeen" || myword == "Seventeen")
+            {
+                temp += 17;
+            }
+            else if (myword == "eighteen" || myword == "Eighteen")
+            {
+                temp += 18;
+            }
+            else if (myword == "nineteen" || myword == "Nineteen")
+            {
+                temp += 18;
+            }
+            else if (myword == "twenty" || myword == "Twenty")
+            {
+                temp += 20;
+            }
+            else if (myword == "thirty" || myword == "Thirty")
+            {
+                temp += 30;
+            }
+            else if (myword == "fourty" || myword == "Fourty" || myword == "Forty" || myword == "Forty")
+            {
+                temp += 40;
+            }
+            else if (myword == "fifty" || myword == "Fifty")
+            {
+                temp += 50;
+            }
+            else if (myword == "sixty" || myword == "Sixty")
+            {
+                temp += 60;
+            }
+            else if (myword == "seventy" || myword == "Seventy")
+            {
+                temp += 70;
+            }
+            else if (myword == "eighty" || myword == "Eighty")
+            {
+                temp += 80;
+            }
+            else if (myword == "ninety" || myword == "Ninety")
+            {
+                temp += 90;
+            }
+            else if (myword == "hundreds" || myword == "Hundreds" || myword == "Hundred" || myword == "hundred" ||
+                     myword == "wundreds" || myword == "Wundreds" || myword == "Wundred" || myword == "wundred")
+            {
+                temp *= 100;
+            }
+            else if (myword == "thousand" || myword == "Thousand" || myword == "Thousands" || myword == "thousands")
+            {
+                n += (temp * 1000);
+                temp = 0;
+            }
+            else if (myword == "million" || myword == "Million" || myword == "Millions" || myword == "millions")
+            {
+                n += (temp * 1000000);
+                temp = 0;
+            }
+            else if (myword == "billion" || myword == "Billion" || myword == "Billions" || myword == "billions")
+            {
+                n += (temp * 1000000000);
+                temp = 0;
+            }
+            else
+            {
+                // If Anyy Error in Words Reading will tell
+                if (int(myword[0]) != 0)
+                {
+                    cout << "Error";
+                    cout << " In Ref " << ref << endl;
+                    cout << "Words" << words << endl;
+                    cout << "(" << myword << ")" << endl;
+                }
+            }
+            myword = "";
+        }
+        else
+        {
+            myword += words[i];
+        }
+    }
+    n += temp;
+    cout << n << "\t";
+    return n;
 }
 
 void Format::readRef()
@@ -326,7 +337,7 @@ void Format::readDollars()
     {
         if (line[index] == ' ')
         {
-            totalAmount += (' '+ word);
+            totalAmount += (' ' + word);
             word = "";
         }
         else
@@ -341,7 +352,6 @@ void Format::readDollars()
     // Updating Index
     currPos = index + 1;
 }
-
 void Format::readCents()
 {
     string totalCents = "";
@@ -414,7 +424,7 @@ void Format::readNo2()
 
     while (word != "Years")
     {
-        
+
         if (word == "years" || word == "year")
         {
             if (line[index + 1] = 's')
@@ -439,4 +449,46 @@ void Format::readNo2()
 
     no2 = wordToNumber(number);
     currPos = index;
+}
+// AND Nine.Eighteen %
+void Format::readNo3(){
+    string number = "";
+    string word = "";
+    int deciaml=-1;
+    int index = currPos;
+    int count=0;
+
+    while (word != "%")
+    {
+        if (word == "AND" || word == "ND" || word == "and" || word == "nd")
+        {
+            word = "";
+            index--;
+        }
+        else if (line[index] == ' ')
+        {
+            number += (' ' + word);
+            word = "";
+        }
+        else if (line[index] == '.')
+        {
+            deciaml = true;
+            number += (' ' + word);
+            number+=' ';
+
+            no3=wordToNumber(number);
+            number=" ";
+            word="";                     
+        }
+        else
+        {
+            word += line[index];
+        }
+        index++;
+        count++;
+    }
+    number+=' ';
+    no3=no3+ 0.01*wordToNumber(number);
+    cout<<no3<<endl;
+
 }
