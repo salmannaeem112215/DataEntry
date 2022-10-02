@@ -556,12 +556,10 @@ bool decimal = false;
     {
         cout << "Error Found Decimal Not FOund " << endl;
         cout << " In Ref " << ref << endl;
-        cout << " no5 Value " << no3 << endl;
+        cout << " no4 Value " << no4 << endl;
     }
 }
-
 // %) (Monthly Principal Reduction 828%)
-
 void Format::readNo5()
 {
     string number = "";
@@ -608,9 +606,8 @@ void Format::readNo5()
     {
         cout << "Error Found Decimal Not FOund " << endl;
         cout << " In Ref " << ref << endl;
-        cout << " no5 Value " << no3 << endl;
+        cout << " no5 Value " << no5 << endl;
     }
-
 }
 // %) (Total Interest Reduction 14.41%)
 void Format::readNo6()
@@ -621,7 +618,8 @@ void Format::readNo6()
     {
         currPos++;
     }
-    int index = currPos;
+    cout<<line[currPos]<<endl;
+    int index = currPos; // Position just before %
     while (found)
     {
         // Space Found Before
@@ -640,7 +638,7 @@ void Format::readNo6()
                     }
             }            
         }
-        // cout<<line[index];
+        cout<<line[index];
         index--;
     }
     bool decimal=false;;
@@ -659,7 +657,7 @@ void Format::readNo6()
     {
         cout << "Error Found Decimal Not FOund " << endl;
         cout << " In Ref " << ref << endl;
-        cout << " no5 Value " << no3 << endl;
+        cout << " no6 Value " << no6 << endl;
     }
 
 }
