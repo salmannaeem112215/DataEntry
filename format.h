@@ -13,7 +13,7 @@ public:
     string name;
     string country;
     string city;
-    int dollars;
+    long long int dollars;
     int cents;
     int no1;
     int no2;
@@ -32,7 +32,8 @@ public:
         file<<ref<<"\t"
             <<name<<"\t"
             <<country<<"\t"
-            <<city<<'\t' 
+            <<city<<'\t'
+            <<dollars<<"." 
             <<endl;
     }
     // Needed if There is SOme Null Values PResent
@@ -63,8 +64,11 @@ public:
         }
         return s;
     }
-    long long int wordToNumber(string words) {
+    long long int wordToNumber(string& words) {
 	string myword = "";
+    
+
+
 	long long int n = 0;		//the number
 	long long int temp = 0;
 	long long int finalVlaue = 0;
@@ -133,7 +137,7 @@ public:
 			else if (myword == "thirty" || myword == "Thirty") {
 				temp += 30;
 			}
-			else if (myword == "fourty" || myword == "Fourty") {
+			else if (myword == "fourty" || myword == "Fourty" || myword == "Forty" ||myword == "Forty" ) {
 				temp += 40;
 			}
 			else if (myword == "fifty" || myword == "Fifty") {
@@ -151,7 +155,8 @@ public:
 			else if (myword == "ninety" || myword == "Ninety") {
 				temp += 90;
 			}
-			else if (myword == "hundreds" || myword == "Hundreds" || myword == "Hundred" || myword == "hundred") {
+			else if (myword == "hundreds" || myword == "Hundreds" || myword == "Hundred" || myword == "hundred"|| 
+                    myword == "wundreds" || myword == "Wundreds" || myword == "Wundred" || myword == "wundred") {
 				temp *= 100;
 			}
 			else if (myword == "thousand" || myword == "Thousand" || myword == "Thousands" || myword == "thousands") {
@@ -167,7 +172,13 @@ public:
 				temp = 0;
 			}
 			else {
+				//If Anyy Error in Words Reading will tell
+                if(int(myword[0])!= 0){
 				cout << "Error";
+                cout<<" In Ref "<<ref<<endl;
+                cout<<"Words"<<words<<endl;
+                cout<<"("<<myword<<")"<<endl;
+                }
 			}
 			myword = "";
 			
@@ -254,5 +265,19 @@ void Format::readNameCountryCity()
     currPos = lineIndex;
 }
 void Format::readDollars(){
-    
+    string totalAmount = "";
+    string word=" ";
+    int index=currPos+1;  // will be at space 
+    while((word != "Dollars" && word != "dollars" && word != "Dollar" ) ){
+        if(line[index]==' '){
+            totalAmount += (' '+word);
+            word="";
+        }
+        else{
+            word+=line[index];
+        }
+        index++;
+    }
+    totalAmount += " ";
+    dollars = wordToNumber(totalAmount);
 }

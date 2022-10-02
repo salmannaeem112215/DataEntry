@@ -40,9 +40,11 @@ int main()
             lineFormator.readRef();
             lineFormator.readNameCountryCity();
             lineFormator.readDollars();
-           lineFormator.storeDataOnFile(output);
+
+            lineFormator.storeDataOnFile(output);
 
             lineFormator.nullValue();
         }
     }
+    getch();
 }
