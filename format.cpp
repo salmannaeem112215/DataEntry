@@ -42,6 +42,8 @@ int main()
             lineFormator.readNo1();
             lineFormator.readNo2();
             lineFormator.readNo3();
+            lineFormator.readNo4();
+            lineFormator.readNo5();
 
             lineFormator.storeDataOnFile(output);
 

@@ -18,9 +18,9 @@ public:
     int no1;
     int no2;
     double no3;
-    double no4;
-    double no5;
-    double no6;
+    string no4;
+    string no5;
+    string no6;
     string endName;
     string endRef;
 
@@ -43,6 +43,9 @@ public:
     void readNo1();
     void readNo2();
     void readNo3();
+    void readNo4();
+    void readNo5();
+    void readNo6();
 };
 
 Format::Format()
@@ -60,6 +63,9 @@ void Format::storeDataOnFile(fstream &file)
          << no1 << "\t"
          << no2 << "\t"
          << no3 << "\t"
+         << no4 << "\t"
+         << no5 << "\t"
+         << no6 << "\t"
          << endl;
 }
 // Needed if There is SOme Null Values PResent
@@ -90,8 +96,8 @@ void Format::removeNullFromLine()
 }
 void Format::nullValue()
 {
-    line = ref = name = country = city = endName = endRef = "";
-    dollars = cents = no1 = no2 = no3 = no4 = no5 = no6 = lineSize = currPos = 0;
+    line = ref = name = country = city = endName = endRef = no4 = no5 = no6 = "";
+    dollars = cents = no1 = no2 = no3  = lineSize = currPos = 0;
     cout << endl;
 }
 string Format::convertToString(char *a, int size, int start = 0)
@@ -451,12 +457,13 @@ void Format::readNo2()
     currPos = index;
 }
 // AND Nine.Eighteen %
-void Format::readNo3(){
+void Format::readNo3()
+{
     string number = "";
     string word = "";
-    int deciaml=-1;
+    bool decimal = false;
     int index = currPos;
-    int count=0;
+    int count = 0;
 
     while (word != "%")
     {
@@ -472,13 +479,13 @@ void Format::readNo3(){
         }
         else if (line[index] == '.')
         {
-            deciaml = true;
+            decimal = true;
             number += (' ' + word);
-            number+=' ';
+            number += ' ';
 
-            no3=wordToNumber(number);
-            number=" ";
-            word="";                     
+            no3 = wordToNumber(number);
+            number = " ";
+            word = "";
         }
         else
         {
@@ -487,8 +494,172 @@ void Format::readNo3(){
         index++;
         count++;
     }
-    number+=' ';
-    no3=no3+ 0.01*wordToNumber(number);
-    cout<<no3<<endl;
+    number += ' ';
+    no3 = no3 + 0.01 * wordToNumber(number);
+    cout << no3 << endl;
+
+    if (!decimal)
+    {
+        cout << "Error Found Decimal Not FOund " << endl;
+        cout << " In Ref " << ref << endl;
+        cout << " no3 Value " << no3 << endl;
+    }
+    currPos = index;
+}
+//  (Purchase Value Reduction 13.14%) (Monthly Principal Reduction 4.69%) (Total Interest Reduction 14.41%)
+void Format::readNo4()
+{
+    string number = "";
+    bool found = true;
+    while (line[currPos] != '%')
+    {
+        // cout<<line[currPos];
+        currPos++;
+    }
+    int index = currPos;
+    while (found)
+    {
+        // Space Found Before
+        if (line[index] == ' ' || line[index]=='n')
+        {
+            if(line[index]=='n'){
+                index++;
+                break;
+            }
+            // Is Not Number
+            if (int(line[index - 1]) >= 57 && int(line[index - 1]) >= 48)
+            {
+                    if (int(line[index + 1]) <= 57 && int(line[index + 1]) >= 48)
+                    {
+                        break;
+                    }
+            }            
+        }
+        index--;
+    }
+bool decimal = false;
+   for(int i=index; i<currPos; i++){
+    if(line[i]=='.'){
+        decimal=true;
+    }
+    number+=line[i];
+    
+   }
+    number+=" ";
+    no4=number;
+    // cout<<number<<"\t";
+
+    cout<<line[currPos]<<endl;
+    currPos++;
+
+    if (!decimal)
+    {
+        cout << "Error Found Decimal Not FOund " << endl;
+        cout << " In Ref " << ref << endl;
+        cout << " no5 Value " << no3 << endl;
+    }
+}
+
+// %) (Monthly Principal Reduction 828%)
+
+void Format::readNo5()
+{
+    string number = "";
+    bool found = true;
+    while (line[currPos] != '%')
+    {
+        // cout<<line[currPos];
+        currPos++;
+    }
+    int index = currPos;
+    while (found)
+    {
+        // Space Found Before
+        if (line[index] == ' ' || line[index]=='n')
+        {
+            if(line[index]=='n'){
+                index++;
+                break;
+            }
+            // Is Not Number
+            if (int(line[index - 1]) >= 57 && int(line[index - 1]) >= 48)
+            {
+                    if (int(line[index + 1]) <= 57 && int(line[index + 1]) >= 48)
+                    {
+                        break;
+                    }
+            }            
+        }
+        // cout<<line[index];
+        index--;
+    }
+    bool decimal=false;;
+   for(int i=index; i<currPos; i++){
+    if(line[i]=='.'){
+        decimal= true;
+    }
+    number+=line[i];
+   }
+    number+=" ";
+    no5=number;
+    currPos++;
+
+    if (!decimal)
+    {
+        cout << "Error Found Decimal Not FOund " << endl;
+        cout << " In Ref " << ref << endl;
+        cout << " no5 Value " << no3 << endl;
+    }
+
+}
+// %) (Total Interest Reduction 14.41%)
+void Format::readNo6()
+{
+    string number = "";
+    bool found = true;
+    while (line[currPos] != '%')
+    {
+        currPos++;
+    }
+    int index = currPos;
+    while (found)
+    {
+        // Space Found Before
+        if (line[index] == ' ' || line[index]=='n')
+        {
+            if(line[index]=='n'){
+                index++;
+                break;
+            }
+            // Is Not Number
+            if (int(line[index - 1]) >= 57 && int(line[index - 1]) >= 48)
+            {
+                    if (int(line[index + 1]) <= 57 && int(line[index + 1]) >= 48)
+                    {
+                        break;
+                    }
+            }            
+        }
+        // cout<<line[index];
+        index--;
+    }
+    bool decimal=false;;
+   for(int i=index; i<currPos; i++){
+    if(line[i]=='.'){
+        decimal= true;
+    }
+    number+=line[i];
+   }
+    number+=" ";
+    no6=number;
+    cout<<number<<endl;
+    currPos++;
+
+    if (!decimal)
+    {
+        cout << "Error Found Decimal Not FOund " << endl;
+        cout << " In Ref " << ref << endl;
+        cout << " no5 Value " << no3 << endl;
+    }
 
 }
