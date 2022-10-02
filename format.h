@@ -28,6 +28,13 @@ public:
     int currPos;
 
     Format();
+    void storeDataOnFile(fstream& file){
+        file<<ref<<"\t"
+            <<name<<"\t"
+            <<country<<"\t"
+            <<city<<'\t' 
+            <<endl;
+    }
     // Needed if There is SOme Null Values PResent
     void removeNullFromLine()
     {

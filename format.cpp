@@ -7,9 +7,6 @@
 using namespace std;
 
 
-
-
-
 int main()
 {
     fstream input;
@@ -42,7 +39,7 @@ int main()
             lineFormator.readRef();
             lineFormator.readNameCountryCity();
 
-            output << lineFormator.ref << "\t" << lineFormator.name << "\t" << lineFormator.country << "\t" << lineFormator.city << endl;
+           lineFormator.storeDataOnFile(output);
 
             lineFormator.nullValue();
         }
